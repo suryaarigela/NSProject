@@ -1,0 +1,45 @@
+<div>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+   <div><h3 color="black">Plan Your Journey</h3></div>
+    <div class="form-group">
+        <label color="black" for="from">From</label>
+        <input class="input-lg col-lg-*" auto-complete formControlName="from" 
+    
+        [source]="mySource"  
+        [list-formatter]="autocompleListFormatter" 
+        value-property-name="code"
+       display-property-name="name"
+         placeholder="From Address" />
+     
+    </div>
+    <div  *ngIf="!signupForm.controls.from.valid">
+              <div class ="alert alert-danger" *ngIf="signupForm.controls.from.touched && signupForm.controls.from.errors.required">
+                     from address is required
+             </div>
+            <div class ="alert alert-danger" *ngIf="signupForm.controls.from.touched && signupForm.controls.from.errors.minlength">
+                    from Address is minimum with 3 characters
+            </div>
+        </div>
+
+       <div class="form-group">
+        <label for="toAddress">To Address</label>
+        <input class="input-lg"  auto-complete formControlName="toAddress"   
+         [source]="mySource"  
+        [list-formatter]="autocompleListFormatter" 
+        value-property-name="code"
+       display-property-name="name"
+         placeholder="To Address" />
+    
+    </div>
+    <div  *ngIf="!signupForm.controls.toAddress.valid">
+              <div class ="alert alert-danger" *ngIf="signupForm.controls.toAddress.touched && signupForm.controls.toAddress.errors.required">
+                     To address is required
+             </div>
+            <div class ="alert alert-danger" *ngIf="signupForm.controls.toAddress.touched && signupForm.controls.toAddress.errors.minlength">
+                    To Address is minimum with 3 characters
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Plan My Journey</button>
+    </form>
+    
+</div>

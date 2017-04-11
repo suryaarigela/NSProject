@@ -1,0 +1,102 @@
+
+<html>
+<h1>TransferDetails</h1>
+
+   <!-- <div *ngFor="let option of stationDetails">
+       
+           <table class="table-fill">
+<thead>
+ <tr>
+                <th class="text-left"  colspan="3">{{option.nrOfStops}}</th>
+             </tr> 
+</thead>
+
+
+
+</table>
+
+      
+    </div>-->
+
+    <div class="container">
+              
+  <table class="table table-striped">
+      
+    <thead>
+      <tr>
+        <th>Nr of stops</th>
+        <th>Dep Time</th>
+        <th>Arr Time</th>
+        <th>Status</th>
+        <th>Journey Time</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let option of stationDetails">
+
+      <tr data-toggle="modal" data-target="#myModal" (click)="showModel=true;openModal(option)">
+        <td>{{option.nrOfStops}}</td>
+        <td>{{option.actualDepTime | date:'jm'}}</td>
+        <td>{{option.actualArrivalTime | date:'jm'}}</td>
+        <td>{{option.status}}</td>
+        <td>{{option.actualHrs}}</td>
+        
+
+      </tr>
+      
+      
+    </tbody>
+  </table>
+</div>
+
+   <div class="container">
+  <!-- Modal -->
+  <div  *ngIf="showModel" class="modal" style="display:block"  id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" (click)="showModel=false;">&times;</button>
+          <h4 class="modal-title">Stops Details</h4>
+        </div>
+        <div class="modal-body" style="overflow-y:scroll">
+   <div *ngFor="let halt of haltDetails">
+     <h2>{{halt.carrier}}-{{halt.transportationType}}</h2>
+          
+  <table class="table table-striped">
+      
+    <thead>
+      <tr>
+        <th>StationName/PF No</th>
+        <th>Dep Time</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let stop of halt.stopsList">
+        
+      <tr>
+        <td *ngIf="stop.platForm !== null">{{stop.stationName}}{{'/'+ stop.platForm}}</td>
+        <td *ngIf="stop.platForm === null">{{stop.stationName}}</td>
+        <td>{{stop.time | date:'jm'}}</td>
+        
+      </tr>
+      
+      
+    </tbody>
+  </table>
+  </div> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="showModel=false;">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+</html>
+
+     
+    
+    
